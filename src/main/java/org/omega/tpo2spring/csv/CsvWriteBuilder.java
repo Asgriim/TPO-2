@@ -12,6 +12,7 @@ public class CsvWriteBuilder {
     private double delta;
     private Function<Double, Double> function;
     private boolean header;
+    private String delimiter = ",";
 
     public CsvWriteBuilder file(String filePath) {
         this.filePath = filePath;
@@ -43,8 +44,14 @@ public class CsvWriteBuilder {
         return this;
     }
 
+    public CsvWriteBuilder setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+        return this;
+    }
+
     public CsvWriteBuilder execute() throws IOException {
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new FileWriter(filePath)), function);
+        csvWriter.setDelimiter(delimiter);
         csvWriter.write(begin,end,delta, header);
         return this;
     }
