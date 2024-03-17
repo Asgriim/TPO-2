@@ -14,14 +14,14 @@ public class Ln implements Function<Double, Double> {
     @Value("${taylor.steps}")
     private double steps;
 
-//    @Override
-//    public Double apply(Double x) {
-//        return Math.log(x);
-//    }
-
+    @Value("${funcs.is_using_math}")
+    private boolean isUsingMath;
 
     @Override
     public Double apply(Double x) {
+        if (isUsingMath) {
+            return Math.log(x);
+        }
         double num, mul, cal, sum = 0;
 
         num = (x - 1) / (x + 1);
