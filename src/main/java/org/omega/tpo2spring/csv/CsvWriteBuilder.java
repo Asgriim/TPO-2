@@ -11,6 +11,7 @@ public class CsvWriteBuilder {
     private double begin;
     private double delta;
     private Function<Double, Double> function;
+    private boolean header;
 
     public CsvWriteBuilder file(String filePath) {
         this.filePath = filePath;
@@ -37,9 +38,14 @@ public class CsvWriteBuilder {
         return this;
     }
 
+    public CsvWriteBuilder writeHeader(boolean header) {
+        this.header = header;
+        return this;
+    }
+
     public CsvWriteBuilder execute() throws IOException {
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new FileWriter(filePath)), function);
-        csvWriter.write(begin,end,delta);
+        csvWriter.write(begin,end,delta, header);
         return this;
     }
 }

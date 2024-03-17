@@ -14,6 +14,12 @@ public class Ln implements Function<Double, Double> {
     @Value("${taylor.steps}")
     private double steps;
 
+//    @Override
+//    public Double apply(Double x) {
+//        return Math.log(x);
+//    }
+
+
     @Override
     public Double apply(Double x) {
         double num, mul, cal, sum = 0;
