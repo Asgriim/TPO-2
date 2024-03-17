@@ -20,6 +20,10 @@ public class Sin implements Function<Double, Double> {
 
     @Override
     public Double apply(Double x) {
-        return pow(-1, steps) * pow(x, 2 * steps + 1) / factorial.apply((long) (2 * steps + 1));
+        double sum = 0;
+        for (int n = 0; n <= steps; n++){
+            sum += Math.pow(-1, n) * Math.pow(x, 2*n + 1) / factorial.apply((long)(2*n + 1));
+        }
+        return sum;
     }
 }

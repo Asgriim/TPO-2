@@ -8,19 +8,17 @@ import java.util.function.Function;
 
 @Component
 @NoArgsConstructor
-public class Factorial implements Function<Long, Long> {
+public class Factorial implements Function<Long, Double> {
 
     @Override
-    public Long apply(Long x) {
+    public Double apply(Long x) {
         if (x < 0) {
             throw new ArithmeticException("Factorial is unknown if n < 0");
         }
-        long n = 1;
-
-        for (int i = 1; i <= x; i++) {
-            n *= i;
+        double z = 1;
+        for (int i = 1; i <= x; i++){
+            z *= i;
         }
-
-        return n;
+        return z;
     }
 }
