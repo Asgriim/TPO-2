@@ -1,18 +1,19 @@
-package org.omega.tpo2spring.functions;
+package org.omega.tpo2spring.functions.trig;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
+import static java.lang.Math.PI;
+
 @Component
 @RequiredArgsConstructor
-public class Tan implements Function<Double, Double> {
+public class Cos implements Function<Double, Double> {
     private final Sin sin;
-    private final Cos cos;
 
     @Override
     public Double apply(Double x) {
-        return sin.apply(x) / cos.apply(x);
+        return sin.apply(PI / 2 - x);
     }
 }

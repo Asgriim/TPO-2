@@ -5,6 +5,10 @@ import org.omega.tpo2spring.csv.CsvWriteBuilder;
 import org.omega.tpo2spring.functions.*;
 import org.omega.tpo2spring.functions.logs.BigLogFunction;
 import org.omega.tpo2spring.functions.logs.Ln;
+import org.omega.tpo2spring.functions.trig.Cos;
+import org.omega.tpo2spring.functions.trig.Cot;
+import org.omega.tpo2spring.functions.trig.Sin;
+import org.omega.tpo2spring.functions.trig.Tan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,7 +45,8 @@ public class Tpo2SpringApplication implements CommandLineRunner {
                 .delta(0.2)
                 .writeHeader(false)
 //                .file("/home/asgrim/IdeaProjects/TPO-2-spring/src/test/resources/logCsv/lnData.csv")
-                .file("C:/Users/vagae/IdeaProjects/TPO-2/csvFilesOutput/sin.csv")
-                .execute();
+//                .file("C:/Users/vagae/IdeaProjects/TPO-2/csvFilesOutput/sin.csv")
+//                .execute();
+        ;
     }
 }

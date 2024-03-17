@@ -1,7 +1,8 @@
-package org.omega.tpo2spring.functions;
+package org.omega.tpo2spring.functions.trig;
 
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.omega.tpo2spring.functions.Factorial;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

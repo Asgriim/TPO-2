@@ -1,4 +1,4 @@
-package org.omega.tpo2spring.functions;
+package org.omega.tpo2spring.functions.trig;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -7,11 +7,11 @@ import java.util.function.Function;
 
 @Component
 @RequiredArgsConstructor
-public class Csc implements Function<Double, Double> {
-    private final Sin sin;
+public class Sec implements Function<Double, Double> {
+    private final Cos cos;
 
     @Override
     public Double apply(Double x) {
-        return 1 / sin.apply(x);
+        return 1 / cos.apply(x);
     }
 }
