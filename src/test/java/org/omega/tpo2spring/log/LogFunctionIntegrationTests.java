@@ -5,8 +5,10 @@ import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.mockito.Mock;
 import org.omega.tpo2spring.functions.SystemFunction;
 import org.omega.tpo2spring.functions.logs.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LogFunctionIntegrationTests {
 
     @Autowired
@@ -43,14 +46,21 @@ public class LogFunctionIntegrationTests {
     @Value("${funcs.log.precision}")
     private double precision;
 
-    private static final Ln lnMock = mock(Ln.class);
-    private static final Log10 log10Mock = mock(Log10.class);
-    private static final Log5 log5Mock = mock(Log5.class);
-    private static final Log3 log3Mock = mock(Log3.class);
+    @Mock
+    private Ln lnMock;
+
+    @Mock
+    private Log10 log10Mock;
+
+    @Mock
+    private Log5 log5Mock;
+
+    @Mock
+    private Log3 log3Mock;
 
 
 
-    private static void initMock(String path, Function<Double, Double> function) {
+    private void initMock(String path, Function<Double, Double> function) {
         try (CSVReader csvReader = new CSVReader(new FileReader(path))) {
             csvReader.readAll().forEach(s -> {
                 double x = Double.parseDouble(s[0]);
@@ -63,7 +73,7 @@ public class LogFunctionIntegrationTests {
     }
 
     @BeforeAll
-    static void setupMocks() {
+    void setupMocks() {
         initMock("src/test/resources/logCsv/lnData.csv", lnMock);
         initMock("src/test/resources/logCsv/log3Data.csv", log3Mock);
         initMock("src/test/resources/logCsv/log5Data.csv", log5Mock);

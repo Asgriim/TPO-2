@@ -2,13 +2,12 @@ package org.omega.tpo2spring.trig;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.omega.tpo2spring.functions.logs.BigLogFunction;
+import org.mockito.Mock;
 import org.omega.tpo2spring.functions.trig.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,11 +17,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.function.Function;
 
+import static java.lang.Math.PI;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OmegaTrigFuncIntegrationTests {
 
     @Autowired
@@ -46,15 +47,26 @@ public class OmegaTrigFuncIntegrationTests {
     @Value("${funcs.log.precision.percentage}")
     private double precision;
 
-    private static final Cos cosMock = mock(Cos.class);
-    private static final Cot cotMock = mock(Cot.class);
-    private static final Csc cscMock = mock(Csc.class);
-    private static final Sec secMock = mock(Sec.class);
-    private static final Sin sinMock = mock(Sin.class);
-    private static final Tan tanMock = mock(Tan.class);
+    @Mock
+    private Cos cosMock;
+
+    @Mock
+    private Cot cotMock;
+
+    @Mock
+    private Csc cscMock;
+
+    @Mock
+    private Sec secMock;
+
+    @Mock
+    private Sin sinMock;
+
+    @Mock
+    private Tan tanMock;
 
 
-    private static void initMock(String path, Function<Double, Double> function) {
+    private void initMock(String path, Function<Double, Double> function) {
         try (CSVReader csvReader = new CSVReader(new FileReader(path))) {
             csvReader.readAll().forEach(s -> {
                 double x = Double.parseDouble(s[0]);
@@ -68,7 +80,7 @@ public class OmegaTrigFuncIntegrationTests {
 
 
     @BeforeAll
-    static void setupMocks() {
+    void setupMocks() {
         initMock("src/test/resources/trigCsv/cosData.csv", cosMock);
         initMock("src/test/resources/trigCsv/cotData.csv", cotMock);
         initMock("src/test/resources/trigCsv/cscData.csv", cscMock);
@@ -77,6 +89,14 @@ public class OmegaTrigFuncIntegrationTests {
         initMock("src/test/resources/trigCsv/tanData.csv", tanMock);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigCsv/cosData.csv")
+    @DisplayName("trig function test with full mocks")
+    void testCosMock(double x, double expected) {
+        Cos cosTest = new Cos(sinMock);
+        assertThat(cosTest.apply(x))
+                .isCloseTo(expected, withinPercentage(precision));
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/trigCsv/omegaTrigData.csv")

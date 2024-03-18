@@ -14,6 +14,15 @@ public class Cos implements Function<Double, Double> {
 
     @Override
     public Double apply(Double x) {
-        return sin.apply(PI / 2 - x);
+        int coefficient = 1;
+        x = Math.abs(x);
+        while (x > 3 * PI / 2){
+            x -= PI;
+        }
+        if (x > PI / 2) coefficient *= -1;
+        double res = coefficient * Math.sqrt(1 - Math.pow(sin.apply(x),2));
+        System.out.println("out " + res);
+        return res;
+//        return sin.apply(PI / 2 - x);
     }
 }
