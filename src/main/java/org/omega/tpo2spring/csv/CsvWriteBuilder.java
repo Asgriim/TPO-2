@@ -3,6 +3,7 @@ package org.omega.tpo2spring.csv;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.function.Function;
 
 public class CsvWriteBuilder {
@@ -53,6 +54,13 @@ public class CsvWriteBuilder {
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new FileWriter(filePath)), function);
         csvWriter.setDelimiter(delimiter);
         csvWriter.write(begin,end,delta, header);
+        return this;
+    }
+
+    public CsvWriteBuilder execute(List<Double> points) throws IOException {
+        CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new FileWriter(filePath)), function);
+        csvWriter.setDelimiter(delimiter);
+        csvWriter.write(points, header);
         return this;
     }
 }
