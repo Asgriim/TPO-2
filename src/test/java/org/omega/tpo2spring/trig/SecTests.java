@@ -21,7 +21,7 @@ public class SecTests {
     private double precision;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/trigCsv/secData.csv")
+    @CsvFileSource(resources = "/trigCsv/unit/secData.csv")
     @DisplayName("sec table points tests")
     void testTableValues(Double x, Double expected) {
         assertThat(sec.apply(x))

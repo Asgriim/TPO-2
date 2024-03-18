@@ -21,7 +21,7 @@ public class CscTests {
     private double precision;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/trigCsv/cscData.csv")
+    @CsvFileSource(resources = "/trigCsv/unit/cscData.csv")
     @DisplayName("csc table points tests")
     void testTableValues(Double x, Double expected) {
         assertThat(csc.apply(x))

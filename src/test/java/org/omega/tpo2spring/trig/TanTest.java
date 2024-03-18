@@ -21,7 +21,7 @@ public class TanTest {
     private double precision;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/trigCsv/tanData.csv")
+    @CsvFileSource(resources = "/trigCsv/unit/tanData.csv")
     @DisplayName("tan table points tests")
     void testTableValues(Double x, Double expected) {
         assertThat(tan.apply(x))

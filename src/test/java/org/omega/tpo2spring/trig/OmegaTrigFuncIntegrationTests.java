@@ -17,7 +17,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.function.Function;
 
-import static java.lang.Math.PI;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -91,12 +90,51 @@ public class OmegaTrigFuncIntegrationTests {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/trigCsv/cosData.csv")
-    @DisplayName("trig function test with full mocks")
+    @DisplayName("cos function test with full mocks")
     void testCosMock(double x, double expected) {
         Cos cosTest = new Cos(sinMock);
         assertThat(cosTest.apply(x))
                 .isCloseTo(expected, withinPercentage(precision));
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigCsv/cscData.csv")
+    @DisplayName("csc function test with full mocks")
+    void testCscMock(double x, double expected) {
+        Csc cscTest = new Csc(sinMock);
+        assertThat(cscTest.apply(x))
+                .isCloseTo(expected, withinPercentage(precision));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigCsv/cotData.csv")
+    @DisplayName("cot function test with full mocks")
+    void testCotMock(double x, double expected) {
+        Cot cotTest = new Cot(sinMock, cosMock);
+        assertThat(cotTest.apply(x))
+                .isCloseTo(expected, withinPercentage(precision));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigCsv/secData.csv")
+    @DisplayName("sec function test with full mocks")
+    void testSecMock(double x, double expected) {
+        Sec secTest = new Sec(cosMock);
+        assertThat(secTest.apply(x))
+                .isCloseTo(expected, withinPercentage(precision));
+    }
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigCsv/tanData.csv")
+    @DisplayName("tan function test with full mocks")
+    void testTanMock(double x, double expected) {
+        Tan tanTest = new Tan(sinMock, cosMock);
+        assertThat(tanTest.apply(x))
+                .isCloseTo(expected, withinPercentage(precision));
+    }
+
+
 
     @ParameterizedTest
     @CsvFileSource(resources = "/trigCsv/omegaTrigData.csv")

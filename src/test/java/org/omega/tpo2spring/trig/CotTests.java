@@ -21,7 +21,7 @@ public class CotTests {
     private double precision;
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/trigCsv/cotData.csv")
+    @CsvFileSource(resources = "/trigCsv/unit/cotData.csv")
     @DisplayName("cot table points tests")
     void testTableValues(Double x, Double expected) {
         assertThat(cot.apply(x))

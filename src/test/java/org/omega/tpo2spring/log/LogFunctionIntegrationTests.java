@@ -80,6 +80,33 @@ public class LogFunctionIntegrationTests {
         initMock("src/test/resources/logCsv/log10Data.csv", log10Mock);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/logCsv/log3Data.csv")
+    @DisplayName("log3 function test with full mocks")
+    void log3TestMock(double x, double expected) {
+        Log3 log3Test = new Log3(lnMock);
+        assertThat(log3Test.apply(x))
+                .isEqualTo(expected, withPrecision(precision));
+    }
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/logCsv/log5Data.csv")
+    @DisplayName("log5 function test with full mocks")
+    void log5TestMock(double x, double expected) {
+        Log5 log5Test = new Log5(lnMock);
+        assertThat(log5Test.apply(x))
+                .isEqualTo(expected, withPrecision(precision));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/logCsv/log10Data.csv")
+    @DisplayName("log10 function test with full mocks")
+    void log10TestMock(double x, double expected) {
+        Log10 log10Test = new Log10(lnMock);
+        assertThat(log10Test.apply(x))
+                .isEqualTo(expected, withPrecision(precision));
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/logCsv/bigLogFunction.csv")
